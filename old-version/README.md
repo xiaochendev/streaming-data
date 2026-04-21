@@ -1,4 +1,4 @@
-| Layer       | Original                                                            	|
+| Category       | Original                                                            	|
 |-----------------|------------------------------------------------------------------------------------------|
 | Backend         | Python 3 BaseHTTPRequestHandler HTTP server (server3.py)                                |
 | Data transport  | Client-side XHR polling every 100ms (DataStreamer.ts)                                   |
