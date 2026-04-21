@@ -1,6 +1,5 @@
-| Category        | Original (Legacy Stack)                                                                 |
+| Layer       | Original                                                            	|
 |-----------------|------------------------------------------------------------------------------------------|
-| Layer           | Original                                                                                 |
 | Backend         | Python 3 BaseHTTPRequestHandler HTTP server (server3.py)                                |
 | Data transport  | Client-side XHR polling every 100ms (DataStreamer.ts)                                   |
 | Frontend        | React 16, TypeScript 3, Create React App 2.1                                             |
