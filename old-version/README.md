@@ -1,9 +1,4 @@
-<p align="center">
-<a href="#" target="_blank">
-<img src="#"></a>
-</p>
 
-</p>
 |---------------|------------------------------------|
 |Original 		| stack (legacy)|
 |Layer			|Original|
@@ -13,15 +8,15 @@
 |Charting		|@jpmorganchase/perspective v0.2.12 (WASM-based, WebAssembly)|
 |Node 			|reqNode v11, npm v6.4.1 (both EOL since ~2019)|
 
-<h3>Bugs:<h3>
-<p>1. clicking "start streaming" re-appends all old rows, causing duplicate in the Perspective table(fixs: use table.update() with deduplication by timestamp+stock key)
-2. data only fetched once per button click(fix: wrap DataStreamer.getData in a setInterval(..., 100)loop)
-3. show ratio of ABC/DEF ask prices, rolling upper/lower bounds(±10% of 12-period avg),and red alert lines when bounds are crossed
-</p>
+## Bugs:
+- 1. clicking "start streaming" re-appends all old rows, causing duplicate in the Perspective table(fixs: use table.update() with deduplication by timestamp+stock key)
+- 2. data only fetched once per button click(fix: wrap DataStreamer.getData in a setInterval(..., 100)loop)
+- 3. show ratio of ABC/DEF ask prices, rolling upper/lower bounds(±10% of 12-period avg),and red alert lines when bounds are crossed
 
-<h1> Streaming Data</h1> 
-<b> from  JP Morgan Chase virtual internship </b>
-<p>technology team at JP Morgan Chase & Co</p>
+
+## Streaming Data
+- from  JP Morgan Chase virtual internship 
+- technology team at JP Morgan Chase & Co
 
 
 <h2 id="task"> Task Overview </h2>
