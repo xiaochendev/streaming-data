@@ -1,12 +1,12 @@
+| Category        | Original (Legacy Stack)                                                                 |
+|-----------------|------------------------------------------------------------------------------------------|
+| Layer           | Original                                                                                 |
+| Backend         | Python 3 BaseHTTPRequestHandler HTTP server (server3.py)                                |
+| Data transport  | Client-side XHR polling every 100ms (DataStreamer.ts)                                   |
+| Frontend        | React 16, TypeScript 3, Create React App 2.1                                             |
+| Charting        | @jpmorganchase/perspective v0.2.12 (WASM-based, WebAssembly)                            |
+| Node            | reqNode v11, npm v6.4.1 (both EOL since ~2019)                                          |
 
-|---------------|------------------------------------|
-|Original 		| stack (legacy)|
-|Layer			|Original|
-|Backend		|Python 3 BaseHTTPRequestHandler HTTP server (server3.py)|
-|Data transport	|Client-side XHR polling every 100ms (DataStreamer.ts)|
-|Frontend		|React 16, TypeScript 3, Create React App 2.1|
-|Charting		|@jpmorganchase/perspective v0.2.12 (WASM-based, WebAssembly)|
-|Node 			|reqNode v11, npm v6.4.1 (both EOL since ~2019)|
 
 ## Bugs:
 - 1. clicking "start streaming" re-appends all old rows, causing duplicate in the Perspective table(fixs: use table.update() with deduplication by timestamp+stock key)
