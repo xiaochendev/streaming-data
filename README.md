@@ -1,8 +1,8 @@
 
-# Streaming Data - refactored JPMorgen intern project
+# Streaming Data 
 
 # Setup
-1. copy this project
+1. Copy this project
 ```
 git clone https://github.com/xiaochendev/streaming-data.git
 ```
@@ -26,20 +26,21 @@ npm install
 npm run dev
 ```
 #### viewable in http://localhost:5173
+!(./view.gif)
 
 # Summary 
 ### Original tasks - 
 - <b>Aim:</b> Use Perspective to generate a chart that displays the data feed in a clear and visually appealing manner for traders to monitor this trading strategy. Basically, you have to modify the existing live chart to be able to (1) track and display the ratio between the two stock prices (2) show the historical upper and lower bounds of the stocks' ratio (3) and finally, show 'alerts'  whenever these bounds are crossed by the ratio.
 - Bugs fixed, includes:
-- 1. clicking "start streaming" re-appends all old rows, causing duplicate in the Perspective table(fixs: use table.update() with deduplication by timestamp+stock key)
-- 2. data only fetched once per button click(fix: wrap DataStreamer.getData in a setInterval(..., 100)loop)
-- 3. show ratio of ABC/DEF ask prices, rolling upper/lower bounds(±10% of 12-period avg),and red alert lines when bounds are crossed
+    1. clicking "start streaming" re-appends all old rows, causing duplicate in the Perspective table(fixs: use table.update() with deduplication by timestamp+stock key)
+    2. data only fetched once per button click(fix: wrap DataStreamer.getData in a setInterval(..., 100)loop)
+    3. show ratio of ABC/DEF ask prices, rolling upper/lower bounds(±10% of 12-period avg),and red alert lines when bounds are crossed
 
-### late Refactored legacy stack to modern but remain same functionality
+### Refactored, but remain same functionality
 
 1. Used FastAPI server replaced old Python HTTP server with CORS, SSE(server-sent events) streaming in 100 ms(no more client polling), and ratio+bounds computed on server, then auto-reload with uvicorn.
 2. Used React 18 + Vite + TS + Recharts replaced old CRA + Perspective
-3. stack choices:
+3. Stack choices:
 
 | Layer                             | Old                           | Refactored                     | Pros (Upgrade Benefits)                                                                                                                                                                                                                          | Cons / Tradeoffs                                                                                                                                               |
 | --------------------------------- | ----------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -67,7 +68,7 @@ npm run dev
 
 - src/App.tsx — Functional component with a single toggle button. No more one-shot-per-click behaviour — streaming starts and runs continuously until stopped.
 
-### Directory Structure
+## Directory Structure
 ```
 streaming-data/
 ├── datafeed/            # Backend directory (Python server)
