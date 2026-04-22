@@ -1,10 +1,15 @@
 
 # Streaming Data 
+<div align="center">
+    <img src="./view.gif" alt="stream data recording" />
+</div>
+
 - Generated a chart that displays the data feed in a clear and visually appealing manner for traders to monitor this trading strategy:
     - auto track and display the ratio between the two stock prices.
     - show the historical upper and lower bounds of the stocks' ratio.
     - show 'alerts' whenever these bounds are crossed by the ratio.
 - Refactored, but remain same functionality
+
 # Setup
 1. Copy this project
 ```
@@ -30,9 +35,7 @@ npm install
 npm run dev
 ```
 #### viewable in http://localhost:5173
-<div align="center">
-    <img src="./view.gif" alt="stream data recording" />
-</div>
+
 
 # Summary 
 ### Original tasks - 
