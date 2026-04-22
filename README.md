@@ -36,7 +36,6 @@ npm run dev
 ```
 #### viewable in http://localhost:5173
 
-
 # Summary 
 ### Original tasks - 
 - Bugs fixed, includes:
@@ -44,7 +43,7 @@ npm run dev
     2. data only fetched once per button click(fix: wrap DataStreamer.getData in a setInterval(..., 100)loop)
     3. show ratio of ABC/DEF ask prices, rolling upper/lower bounds(±10% of 12-period avg),and red alert lines when bounds are crossed
 
-### Refactored, but remain same functionality
+### Refactored, but remain same functionality-
 1. Used FastAPI server replaced old Python HTTP server with CORS, SSE(server-sent events) streaming in 100 ms(no more client polling), and ratio+bounds computed on server, then auto-reload with uvicorn.
 2. Used React 18 + Vite + TS + Recharts replaced old CRA + Perspective
 3. Stack choices:
@@ -61,20 +60,6 @@ npm run dev
 | Frontend framework                | CRA / older React setup       | React 18 + Vite                | Instant dev server startup, extremely fast HMR (ESM-based), smaller build overhead, concurrent rendering support, better SSE compatibility with streaming UI patterns                                                                            | Less “batteries included” than CRA, more explicit configuration responsibility                                                                                 |
 | Frontend architecture             | Class-based polling system    | `useSSEFeed` hook system       | Centralized streaming state, lifecycle-safe connection management, no polling drift bugs, React 18 concurrent-safe updates, easier testing via isolated hook logic                                                                               | Hooks can become complex without modular design, requires discipline to avoid tightly coupled state logic                                                      |
 
-
-## Details:
-- datafeed/server.py - FastAPI replaces the old BaseHTTPRequestHandler. Two endpoints: /query (legacy single-shot, backward compatible) and /stream (SSE, pushes every 100ms). Ratio, upper/lower bounds, and alert detection are all computed here in _compute_ratio_row() using a rolling 200-tick window.
-
-- src/DataStreamer.ts — Wraps the browser's native EventSource API instead of XMLHttpRequest. DataStreamer.start() opens the SSE connection and returns a cleanup function for React effects. The old getData() is still exported for any code that needs it.
-
-- src/useSSEFeed.ts — The core hook. Manages the SSE lifecycle, fixes Goal A (deduplication via Map<stock, ServerRespond> — one entry per stock, never duplicates), accumulates ratio history, and exposes startStreaming / stopStreaming actions. This is the single source of truth that replaces the class component's getDataFromServer() + setInterval.
-
-- src/Graph.tsx — Recharts ComposedChart with three data series: the ratio line (blue), upper/lower bounds (yellow dashed), and <ReferenceLine> vertical red markers at every alert timestamp. Red dots also appear on the ratio line at crossing points. This resolves Goals C and Task 3 in full.
-
-- src/StockTable.tsx — Simple table consuming the deduplicated stockMap. Since it's a Map not an array, rendering it is always duplicate-free by construction.
-
-- src/App.tsx — Functional component with a single toggle button. No more one-shot-per-click behaviour — streaming starts and runs continuously until stopped.
-
 ## Directory Structure
 ```
 streaming-data/
@@ -89,6 +74,19 @@ streaming-data/
 ├── tsconfig.node.json   # TypeScript config for Vite/Node environment
 └── vite.config.ts       # Vite build configuration
 ```
+
+## Details:
+- datafeed/server.py - FastAPI replaces the old BaseHTTPRequestHandler. Two endpoints: /query (legacy single-shot, backward compatible) and /stream (SSE, pushes every 100ms). Ratio, upper/lower bounds, and alert detection are all computed here in _compute_ratio_row() using a rolling 200-tick window.
+
+- src/DataStreamer.ts — Wraps the browser's native EventSource API instead of XMLHttpRequest. DataStreamer.start() opens the SSE connection and returns a cleanup function for React effects. The old getData() is still exported for any code that needs it.
+
+- src/useSSEFeed.ts — The core hook. Manages the SSE lifecycle, fixes Goal A (deduplication via Map<stock, ServerRespond> — one entry per stock, never duplicates), accumulates ratio history, and exposes startStreaming / stopStreaming actions. This is the single source of truth that replaces the class component's getDataFromServer() + setInterval.
+
+- src/Graph.tsx — Recharts ComposedChart with three data series: the ratio line (blue), upper/lower bounds (yellow dashed), and <ReferenceLine> vertical red markers at every alert timestamp. Red dots also appear on the ratio line at crossing points. This resolves Goals C and Task 3 in full.
+
+- src/StockTable.tsx — Simple table consuming the deduplicated stockMap. Since it's a Map not an array, rendering it is always duplicate-free by construction.
+
+- src/App.tsx — Functional component with a single toggle button. No more one-shot-per-click behaviour — streaming starts and runs continuously until stopped.
 
 # Technologies
 - Node.js
