@@ -30,7 +30,9 @@ npm install
 npm run dev
 ```
 #### viewable in http://localhost:5173
-!(https://github.com/xiaochendev/streaming-data/view.gif)
+<div align="center">
+    <img src="./view.gif" alt="stream data recording" />
+</div>
 
 # Summary 
 ### Original tasks - 
