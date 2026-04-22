@@ -1,49 +1,259 @@
-.App {
-  text-align: center;
+/* ============================================================
+   App.css — dark terminal aesthetic for the trading dashboard
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+/* ── Reset / base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base:    #010409;
+  --bg-surface: #0d1117;
+  --bg-raised:  #161b22;
+  --border:     #30363d;
+  --border-sub: #21262d;
+  --text-pri:   #e6edf3;
+  --text-sec:   #8b949e;
+  --blue:       #58a6ff;
+  --green:      #3fb950;
+  --yellow:     #f0b429;
+  --red:        #e63946;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+  --font-ui:    'IBM Plex Sans', system-ui, sans-serif;
+}
+
+html, body {
+  background: var(--bg-base);
+  color: var(--text-pri);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.6;
   min-height: 100vh;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
+/* ── App shell ── */
+.app {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── Header ── */
+.app-header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  margin-bottom: 12px;
+  justify-content: space-between;
+  padding: 18px 0 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-.App-content {
+.header-left {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+}
+
+.brand {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-pri);
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 11px;
+  color: var(--text-sec);
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Status badge ── */
+.status-badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-sec);
+  transition: all 0.2s ease;
 }
 
-.Stream-button {
-  margin-bottom: 12px;
+.status-badge.status-live {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(63, 185, 80, 0.08);
 }
 
-.Graph {
-  min-height: 50vh;
-  width: 700px;
-  margin-bottom: 12px;
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.status-live .status-dot {
+  animation: pulse-dot 1.4s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Controls bar ── */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Stream button */
+.stream-btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.stream-btn--start {
+  background: rgba(88, 166, 255, 0.12);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.stream-btn--start:hover {
+  background: rgba(88, 166, 255, 0.22);
+}
+
+.stream-btn--stop {
+  background: rgba(232, 57, 70, 0.12);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.stream-btn--stop:hover {
+  background: rgba(232, 57, 70, 0.22);
+}
+
+.stream-btn:active {
+  transform: scale(0.97);
+}
+
+/* Stat pills */
+.stat-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-sec);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-sub);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.pill strong {
+  color: var(--text-pri);
+  font-weight: 600;
+}
+
+.error-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--red);
+  background: rgba(232, 57, 70, 0.1);
+  border: 1px solid rgba(232, 57, 70, 0.3);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* ── Main content ── */
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.section {
+  width: 100%;
+}
+
+/* ── Stats grid ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-sec);
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-pri);
+}
+
+/* ── Footer ── */
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  margin-top: 20px;
+  border-top: 1px solid var(--border-sub);
+  font-size: 11px;
+  color: var(--text-sec);
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .app-footer { flex-direction: column; }
+  .controls-bar { flex-direction: column; align-items: flex-start; }
 }
