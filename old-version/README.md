@@ -1,3 +1,10 @@
+## Streaming Data - Proof of work
+
+<div align="center">
+	<img src="./view.gif" alt="stream data recording" />
+</div>
+
+
 | Category       | Original                                                            	|
 |-----------------|------------------------------------------------------------------------------------------|
 | Backend         | Python 3 BaseHTTPRequestHandler HTTP server (server3.py)                                |
@@ -39,11 +46,10 @@ Display data visually for traders.
 </ol>
 
 
-
-
-
 Run <code>npm install && npm start</code> to start the React application.
 
 The recommended version are node v11.0.0 and npm v6.4.1
 
 Open http://localhost:3000 to view the app in the browser. The page will reload if you make edits.
+
+
